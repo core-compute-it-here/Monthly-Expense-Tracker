@@ -4,7 +4,7 @@ from datetime import date,datetime
 def write_to_current_csv(expense_date,category,description,amount):
     today = date.today()
     month_year = today.strftime("%b").upper() + str(today.year)
-    filename = rf"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\{month_year}.csv"
+    filename = rf"{month_year}.csv"
 
     # Create the row data
     new_row = pd.DataFrame([{
@@ -26,7 +26,7 @@ def write_to_current_csv(expense_date,category,description,amount):
         print(f"📁 Created {filename} and saved first entry")
 
 def read_from_freq_csv():
-    d_freq = pd.read_csv(r"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\frequent.csv")
+    d_freq = pd.read_csv(r"frequent.csv")
     return(d_freq)
 
 def write_to_freq_csv(category, description, amount, month_df):
@@ -39,7 +39,7 @@ def write_to_freq_csv(category, description, amount, month_df):
         return  # not frequent yet
     
     # Load frequent.csv
-    freq_df = pd.read_csv(r"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\frequent.csv")
+    freq_df = pd.read_csv(r"frequent.csv")
 
     # Check if already present
     exists = ((freq_df["category"] == category) &
@@ -52,11 +52,11 @@ def write_to_freq_csv(category, description, amount, month_df):
     new_row = {"category": category, "description": description, "amount": amount}
     freq_df = pd.concat([freq_df, pd.DataFrame([new_row])], ignore_index=True)
 
-    freq_df.to_csv(r"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\frequent.csv", index=False)
+    freq_df.to_csv(r"frequent.csv", index=False)
 
 
 def read_from_given_month(month_year):
-    filename = rf"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\{month_year}.csv"   # Example: JAN2025.csv
+    filename = rf"{month_year}.csv"   # Example: JAN2025.csv
     
     if os.path.exists(filename):
         try:
@@ -76,7 +76,7 @@ def write_to_csv(expense_date, category, description, amount):
     
     # Filename based on month and year of the expense
     month_year = date_obj.strftime("%b").upper() + str(date_obj.year)
-    filename = rf"C:\Users\Ujjwal\OneDrive\Desktop\GUI_monthly expense\{month_year}.csv"
+    filename = rf"{month_year}.csv"
     
     # Create a new row as a DataFrame
     new_row = pd.DataFrame([{
@@ -97,3 +97,4 @@ def write_to_csv(expense_date, category, description, amount):
         # Else → create new CSV
         new_row.to_csv(filename, index=False)
         print(f"📁 Created {filename} and saved first entry")
+
